@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Lipunx</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <!-- THIS IS THE CRITICAL FIX: The path must start with "/" -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <div class="logo">LIPUNX</div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/bands/">Bands</a></li>
+                    <li><a href="#">Shows</a></li>
+                    <li><a href="#">Archive</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    <footer id="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Lipunx.com Reboot Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- THIS IS THE OTHER CRITICAL FIX: The path must start with "/" -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
