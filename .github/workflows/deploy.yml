@@ -1,3 +1,4 @@
+# Name of the workflow
 name: Deploy Eleventy to GitHub Pages
 
 on:
@@ -6,40 +7,47 @@ on:
       - main
   workflow_dispatch:
 
-# This is the new, crucial part.
-# It explicitly grants the permissions the deploy action needs.
+# Set the default permissions for all jobs in the workflow
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
-  build-and-deploy:
+  # This job builds the website
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm install
-
       - name: Build site
         run: npx @11ty/eleventy
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './_site'
 
+  # This job deploys the website
+  deploy:
+    # It needs the 'build' job to finish successfully first
+    needs: build
+    
+    # These permissions are SPECIFIC to this deploy job
+    permissions:
+      pages: write      # Required to deploy to GitHub Pages
+      id-token: write   # Required to authenticate with GitHub Pages
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Sets the deployment URL in the GitHub UI
+      
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
