@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
 
-    <!-- THE FIX: Adding the pathPrefix before the path -->
+    <!-- Correct path to CSS file using the global pathPrefix -->
     <link rel="stylesheet" href="{{ metadata.pathPrefix }}css/style.css">
 </head>
 <body>
@@ -19,10 +19,12 @@
             <div class="logo">LIPUNX</div>
             <nav>
                 <ul>
-                    <!-- THE FIX: Adding the pathPrefix to navigation links -->
+                    <!-- Navigation links updated with pathPrefix -->
                     <li><a href="{{ metadata.pathPrefix }}">Home</a></li>
                     <li><a href="#">Bands</a></li>
                     <li><a href="#">Shows</a></li>
+                    <!-- The new link to the submission page -->
+                    <li><a href="{{ metadata.pathPrefix }}submit-band/">Submit a Band</a></li>
                     <li><a href="#">Archive</a></li>
                 </ul>
             </nav>
@@ -30,6 +32,7 @@
     </header>
 
     <main>
+        <!-- This is the placeholder where individual page content is injected -->
         {{ content | safe }}
     </main>
 
@@ -39,7 +42,7 @@
         </div>
     </footer>
 
-    <!-- THE FIX: Adding the pathPrefix before the path -->
+    <!-- Correct path to JavaScript file using the global pathPrefix -->
     <script src="{{ metadata.pathPrefix }}js/main.js"></script>
 </body>
 </html>
